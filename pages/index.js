@@ -152,6 +152,11 @@ export default function Home() {
                               dcaContractWithSigner={dcaContractWithSigner}/>
             </main>
 
+            <div className={styles.rowNoMarginNoPadding} style={{marginTop: 32}}>
+                <p className={styles.dcaCreationText} style={{marginRight: 16}}>Powered by</p>
+                <img src={'/chainlinkAutomation.svg'} style={{width: 300}}/>
+            </div>
+
             <p style={{fontSize: 12, color: 'gray', textAlign: 'center', padding: 32}}>EasyDCA is developed for <a
                 href={"https://chainlinkspring2023.devpost.com/"} target={"_blank"} rel={'noreferrer'}>ChainLink
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
