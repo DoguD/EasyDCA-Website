@@ -53,10 +53,10 @@ export default function CreateBackupBox(props) {
                         userEvents.push(currentPurchase);
                     }
                 }
-                console.log('User Events', userEvents);
-                setPurchases(userEvents);
                 firstBlockNumber += 1000;
             }
+            console.log("User Events", userEvents);
+            setPurchases(userEvents);
         } catch (e) {
             console.log("Past purchases error: ");
             console.log(e);
@@ -68,6 +68,30 @@ export default function CreateBackupBox(props) {
         let dcaCount = parseInt(await props.dcaContract.userDCACount(walletAddress), 10);
         let activeDCAs = [];
         let deactivatedDCAs = [];
+
+        for (let i = 0; i < dcaCount; i++) {
+            let dcaIndex = parseInt(await props.dcaContract.userDCAs(walletAddress, i), 10)
+            let dca = await props.dcaContract.dcaList(dcaIndex);
+
+            let currentDCA = {
+                from: dca[0],
+                stableCoin: dca[1],
+                targetCoin: dca[2],
+                amount: parseInt(dca[3], 10),
+                frequency: parseInt(dca[4], 10),
+                lastPurchase: parseInt(dca[5], 10),
+                treshold: parseInt(dca[6], 10),
+                isActive: dca[7]
+            }
+
+            if (currentDCA.isActive) {
+                activeDCAs.push(currentDCA);
+            } else {
+                deactivatedDCAs.push(currentDCA);
+            }
+        }
+        setActiveDCAs(activeDCAs);
+        setDeactivatedDCAs(deactivatedDCAs);
     }
 
     async function getBalance(decimal) {
@@ -88,9 +112,9 @@ export default function CreateBackupBox(props) {
                        dcaContractWithSigner={props.dcaContractWithSigner}
 
                        getLastPurchases={async () => await getPastPurchases(props.walletAddress)}
-                        getDCAs={async () => await getDCAs(props.walletAddress)}/>
-            <ActiveDCA dca={activeDCAs}/>
-            <DeActiveDCA dca={deactivatedDCAs}/>
+                       getDCAs={async () => await getDCAs(props.walletAddress)}/>
+            <ActiveDCA dcas={activeDCAs}/>
+            <DeActiveDCA dcas={deactivatedDCAs}/>
             <PastPurchases purchases={purchases}/>
         </div>
     );

@@ -36,7 +36,7 @@ export default function CreateDCA(props) {
                 let tokenContract = new ethers.Contract(stableToken, ERC20_ABI, props.provider);
                 console.log(props.walletAddress, DCA_ADDRESS)
                 let allowance = parseInt(await tokenContract.allowance(props.walletAddress, DCA_ADDRESS), 10);
-                console.log(allowance);
+                console.log('Allowance', allowance);
                 setApprovalNeeded(allowance === 0); // Any approval would work
             }
         } catch (e) {
