@@ -100,10 +100,10 @@ export default function CreateDCA(props) {
     }
 
     return (<>
-        <p className={styles.dcaTitle}>Create a new DCA</p>
+        <p className={styles.dcaTitle} style={{width: '100%', textAlign: 'center', marginBottom: 32}}>Create new DCA Order</p>
         <div className={styles.rowNoMarginNoPadding}>
             <p className={styles.dcaCreationText}>I want to buy </p>
-            <input className={styles.basicInput} type={"text"} id={"backup-amount"}
+            <input className={styles.basicInput} type={"text"} id={"dca-amount"}
                    value={amount}
                    placeholder={""}
                    onChange={(b) => {
@@ -135,7 +135,7 @@ export default function CreateDCA(props) {
                 />
             </div>
             <p className={styles.dcaCreationText}>every</p><
-            input className={styles.basicInput} type={"text"} id={"backup-amount"}
+            input className={styles.basicInput} type={"text"} id={"dca-amount"}
                   value={period}
                   placeholder={""}
                   onChange={(b) => {

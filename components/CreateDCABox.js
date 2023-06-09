@@ -88,7 +88,7 @@ export default function CreateDCABox(props) {
         try {
             setBalance(parseInt(await tokenContract.balanceOf(props.walletAddress), 10) / 10 ** decimal);
         } catch (e) {
-            console.log("Backup Box, get allowance error:");
+            console.log("DCA Box, get allowance error:");
             console.log(e);
         }
     }

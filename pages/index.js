@@ -79,7 +79,7 @@ export default function Home() {
     // Wallet Connect
     const connectWalletHandler = async () => {
         if (!metamaskInstalled) {
-            alert("Please install Metamask to use EasyBackup.");
+            alert("Please install Metamask to use EasyDCA.");
             return;
         }
         try {
@@ -88,7 +88,7 @@ export default function Home() {
             chainId = chainId['chainId'];
 
             if (chainId !== 250) {
-                if (window.confirm("Please switch to Fantom Network to use EasyBackup.")) {
+                if (window.confirm("Please switch to Fantom Network to use EasyDCA.")) {
                     await changeNetworkToFTM();
                 }
             } else {
@@ -130,7 +130,7 @@ export default function Home() {
         <div className={styles.container}>
             <Toaster/>
             <Head>
-                <title>EasyBackup - Never lose your crypto</title>
+                <title>EasyDCA - Never lose your crypto</title>
                 <meta name="description" content="DCA Into Crypto Easily"/>
             </Head>
             <main className={styles.main}>
