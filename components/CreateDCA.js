@@ -1,11 +1,11 @@
-import styles from "../../styles/Home.module.css";
+import styles from "../styles/Home.module.css";
 import React, {useEffect, useState} from "react";
-import {PERIOD_OPTIONS, STABLE_TOKENS, TARGET_TOKENS, TOKEN_MAP, TOKENS} from "./Constants";
+import {PERIOD_OPTIONS, STABLE_TOKENS, TARGET_TOKENS, TOKEN_MAP, TOKENS} from "../helpers/Constants";
 import {Dropdown} from "semantic-ui-react";
 import {ClipLoader} from "react-spinners";
-import {ERC20_ABI} from "../../contracts/InProduction/ERC20";
+import {ERC20_ABI} from "../contracts/InProduction/ERC20";
 import {ethers} from "ethers";
-import {DCA_ADDRESS} from "../../contracts/DCA";
+import {DCA_ADDRESS} from "../contracts/DCA";
 import {toast} from "react-hot-toast";
 
 export default function CreateDCA(props) {

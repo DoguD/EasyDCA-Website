@@ -1,9 +1,8 @@
 import styles from "../../styles/Home.module.css";
+import {MONTHS, TOKEN_DECIMALS, TOKEN_LOGOS} from "../../helpers/Constants";
 import React from "react";
-import {MONTHS, TOKEN_DECIMALS, TOKEN_LOGOS, TOKEN_MAP} from "./Constants";
-import {Button} from "semantic-ui-react";
 
-function PastPurchaseRow(props) {
+export default function PastPurchaseRow(props) {
     let dt = new Date(props.purchase.timestamp * 1000);
     return (
         <div className={styles.claimableBackupsRow}>
@@ -21,22 +20,4 @@ function PastPurchaseRow(props) {
             <img src={TOKEN_LOGOS[props.purchase.stableCoin]} style={{marginLeft: 8}} width={22} height={22}/>
         </div>
     )
-}
-
-export default function PastPurchases(props) {
-    console.log(props.purchases)
-    return (
-        <>
-            <p className={styles.dcaTitle}>Your Past Purchases</p>
-            {props.purchases.length === 0 ?
-                // eslint-disable-next-line react/no-unescaped-entities
-                <p className={styles.dcaNoText}>Your DCA strategies hasn't made any purchases yet. Create one to start
-                    growing your crypto holdings
-                    right now.</p>
-                : props.purchases.map((purchase, index) =>
-                    // eslint-disable-next-line react/jsx-key
-                    <PastPurchaseRow purchase={purchase}/>
-                )
-            }
-        </>);
 }

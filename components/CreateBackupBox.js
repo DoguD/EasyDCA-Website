@@ -3,9 +3,11 @@ import React, {useEffect, useState} from 'react'
 import {Button, Dropdown} from 'semantic-ui-react';
 import {ethers} from "ethers";
 import {ERC20_ABI} from "../contracts/InProduction/ERC20";
-import {DEPLOY_BLOCK, TOKEN_MAP} from "./subComponents/Constants";
-import PastPurchases from "./subComponents/PastPurchases";
-import CreateDCA from "./subComponents/CreateDCA";
+import {DEPLOY_BLOCK, TOKEN_MAP} from "../helpers/Constants";
+import PastPurchases from "./PastPurchases";
+import CreateDCA from "./CreateDCA";
+import ActiveDCA from "./ActiveDCA";
+import DeActiveDCA from "./DeActiveDCA";
 
 let tokenContract;
 let tokenContractWithSigner;
@@ -87,8 +89,8 @@ export default function CreateBackupBox(props) {
 
                        getLastPurchases={async () => await getPastPurchases(props.walletAddress)}
                         getDCAs={async () => await getDCAs(props.walletAddress)}/>
-            <p className={styles.dcaTitle}>Your Active DCA Strategies</p>
-            <p className={styles.dcaTitle}>Disabled DCA Strategies</p>
+            <ActiveDCA dca={activeDCAs}/>
+            <DeActiveDCA dca={deactivatedDCAs}/>
             <PastPurchases purchases={purchases}/>
         </div>
     );
