@@ -11,6 +11,7 @@ import ClaimableBackupsBox from "./ClaimableBackupsBox";
 import {TOKEN_MAP} from "./subComponents/Constants";
 import {EXPIRY_OPTIONS, MAX_BIG_INT, TOKENS} from "./subComponents/Constants";
 import {DISCOUNTED_ORACLE_ABI, DISCOUNTED_ORACLE_ADDRESS} from "../contracts/InProduction/DiscountedUserOracle";
+import PastPurchases from "./subComponents/PastPurchases";
 
 let tokenContract;
 let tokenContractWithSigner;
@@ -246,7 +247,7 @@ export default function CreateBackupBox(props) {
                         <p className={styles.dcaTitle}>Create Your Own DCA Strategy</p>
                         <p className={styles.dcaTitle}>Your Active DCA Strategies</p>
                         <p className={styles.dcaTitle}>Disabled DCA Strategies</p>
-                        <p className={styles.dcaTitle}>Your Past Purchases</p>
+                        <PastPurchases purchases={props.purchases}/>
                         <div className={styles.backupCreationCard}>
                             <div className={styles.backupRow}>
                                 <p className={styles.backupTitle}>Token: </p>

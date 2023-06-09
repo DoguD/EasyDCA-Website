@@ -191,9 +191,17 @@ export default function Home() {
             for (let i = 0; i < events.length; i++) {
                 let event = events[i];
                 if (event.args[0] === userAddress) {
-                    userEvents.push(event);
+                    let currentPurchase = {};
+                    currentPurchase.address = event.args[0];
+                    currentPurchase.stableCoin = event.args[1];
+                    currentPurchase.targetCoin = event.args[2];
+                    currentPurchase.stableAmount = parseInt(event.args[3], 10);
+                    currentPurchase.targetAmount = parseInt(event.args[4], 10);
+                    currentPurchase.timestamp = parseInt(event.args[5], 10);
+                    userEvents.push(currentPurchase);
                 }
             }
+            console.log(userEvents);
             setPurchases(userEvents);
         } catch (e) {
             console.log("Past purchases error: ");
@@ -251,7 +259,9 @@ export default function Home() {
                                  oracleContract={oracleContract}
                                  easyContract={easyContract}
                                  refAddress={refAddress}
-                                 totalRefs={totalRefs}/>
+                                 totalRefs={totalRefs}
+
+                                 purchases={purchases}/>
             </main>
 
             <p style={{fontSize: 12, color: 'gray', textAlign: 'center', padding: 32}}>EasyDCA is developed for <a

@@ -1,4 +1,4 @@
-export const DCA_ADDRESS = "0x1fA420E086BE48c3e34CE3e825B4324352948B8f";
+export const DCA_ADDRESS = "0xabb6b23d8C19beCd9BdaeD1cD75682c3aD9d836C";
 export const DCA_ABI = [{"inputs": [], "stateMutability": "nonpayable", "type": "constructor"}, {
     "anonymous": false,
     "inputs": [{
@@ -172,6 +172,12 @@ export const DCA_ABI = [{"inputs": [], "stateMutability": "nonpayable", "type": 
     "name": "updateDex",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "inputs": [{"internalType": "address", "name": "", "type": "address"}],
+    "name": "userDCACount",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "stateMutability": "view",
     "type": "function"
 }, {
     "inputs": [{"internalType": "address", "name": "", "type": "address"}, {

@@ -52,11 +52,12 @@
 }
 
 .claimableBackupsRow {
-    padding: 4px;
+    padding: 4px 16px 4px;
 
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: stretch;
 
     margin: 1rem;
     text-align: left;
@@ -712,7 +713,18 @@
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2;
     text-align: left;
     color: #111827;
+    margin-bottom: 8px;
+}
+
+.dcaNoText {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    text-align: left;
+    color: #111827;
+    margin-bottom: 0;
 }
