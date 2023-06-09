@@ -259,15 +259,19 @@
 }
 
 .mintButton {
-    margin-top: 1rem;
-    padding: 16px;
-    width: 150px;
     display: flex;
-    align-items: center;
+    flex-direction: row;
     justify-content: center;
-    border-radius: 8px;
-    cursor: pointer;
+    align-items: center;
+    padding: 8px 16px 8px;
+    object-fit: contain;
+    border-radius: 9px;
+    background-color: #1a5df5;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 32px;
+
+    width: fit-content;
+    cursor: pointer;
 }
 
 @media (max-width: 600px) {
@@ -277,7 +281,7 @@
 }
 
 .mintText {
-    color: #3a70ed;
+    color: #ffffff;
     margin: 0;
     font-size: 24px;
 }
@@ -382,14 +386,14 @@
     text-align: center;
 }
 
-.walletInput {
+.basicInput {
     border: 1px solid #afafaf;
     border-radius: 20px;
     font-size: 16px;
-    margin: 0;
     padding: 4px;
     text-align: center;
-    width: 100%;
+    width: 80px;
+    margin: 0 8px 0;
 }
 
 .backupCreationCard {
@@ -718,6 +722,17 @@
     margin-bottom: 8px;
 }
 
+.dcaCreationText {
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    text-align: left;
+    color: #111827;
+    margin-bottom: 0px;
+}
+
 .dcaNoText {
     font-family: Inter;
     font-size: 16px;
@@ -727,4 +742,13 @@
     text-align: left;
     color: #111827;
     margin-bottom: 0;
+}
+
+.rowNoMarginNoPadding {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
 }
