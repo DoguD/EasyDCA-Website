@@ -50,12 +50,12 @@ export default function CreateBackupBox(props) {
                         currentPurchase.stableAmount = parseInt(event.args[3], 10);
                         currentPurchase.targetAmount = parseInt(event.args[4], 10);
                         currentPurchase.timestamp = parseInt(event.args[5], 10);
+                        currentPurchase.transactionHash = event.transactionHash;
                         userEvents.push(currentPurchase);
                     }
                 }
                 firstBlockNumber += 1000;
             }
-            console.log("User Events", userEvents);
             setPurchases(userEvents);
         } catch (e) {
             console.log("Past purchases error: ");

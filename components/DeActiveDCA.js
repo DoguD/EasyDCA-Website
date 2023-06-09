@@ -6,7 +6,7 @@ export default function DeActiveDCA(props) {
     return (
         props.dcas.length === 0 ? null :
             <>
-                <p className={styles.dcaTitle}>Disabled DCA Strategies</p>
+                <p className={styles.dcaTitle} style={{marginTop: 32}}>Disabled DCA Strategies</p>
                 <p className={styles.dcaNoText}>These are your deactivated DCA orders which are not currently running.
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
                     If you don't have enough coins or approval for that coin at the time of purchase, DCA orders get
