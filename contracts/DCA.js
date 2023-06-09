@@ -1,5 +1,5 @@
 export const DCA_ADDRESS = "0x1fA420E086BE48c3e34CE3e825B4324352948B8f";
-export const BACKUP_ABI = [{"inputs": [], "stateMutability": "nonpayable", "type": "constructor"}, {
+export const DCA_ABI = [{"inputs": [], "stateMutability": "nonpayable", "type": "constructor"}, {
     "anonymous": false,
     "inputs": [{
         "indexed": true,

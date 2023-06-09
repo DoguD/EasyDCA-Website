@@ -21,6 +21,7 @@ import {BACKUP_ABI, BACKUP_ADDRESS} from "../contracts/InProduction/Backup";
 import {ORACLE_ABI, ORACLE_ADDRESS} from "../contracts/InProduction/Oracle";
 import {useCookies} from "react-cookie";
 import MainSection from "../components/MainSection";
+import {DCA_ABI, DCA_ADDRESS} from "../contracts/DCA";
 
 // Web3 Global Vars
 let provider;
@@ -50,18 +51,15 @@ let oracleContract;
 let usdtContract;
 let usdtContractWithSigner;
 
+let dcaContract;
+let dcaContractWithSigner;
+
 export default function Home() {
     const [walletAddress, setWalletAddress] = useState("");
+    const [purchases, setPurchases] = useState([]);
     // UI Controllers
     const [metamaskInstalled, setMetamaskInstalled] = useState(false);
-    const [easyPrice, setEasyPrice] = useState(0.005);
-    const [easySupply, setEasySupply] = useState(0);
-    const [totalBackups, setTotalBackups] = useState(0);
-    const [discountedBackups, setDiscountedBackups] = useState(0);
-    const [totalUsers, setTotalUsers] = useState(0);
     const [totalRefs, setTotalRefs] = useState(0);
-
-    const [menuItem, setMenuItem] = useState(0);
 
     // Cookie
     const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
@@ -107,6 +105,7 @@ export default function Home() {
             lpContractUsdt = new ethers.Contract(LP_ADDRESS_USDT, LP_ABI, provider);
             farmContract = new ethers.Contract(FARM_ADDRESS, FARM_ABI, provider);
             backupContract = new ethers.Contract(BACKUP_ADDRESS, BACKUP_ABI, provider);
+            dcaContract = new ethers.Contract(DCA_ADDRESS, DCA_ABI, provider);
             oracleContract = new ethers.Contract(ORACLE_ADDRESS, ORACLE_ABI, provider);
 
             getGeneralData();
@@ -173,25 +172,45 @@ export default function Home() {
                 lpContractWithSignerUsdt = lpContractUsdt.connect(signer);
                 farmContractWithSigner = farmContract.connect(signer);
                 backupContractWithSigner = backupContract.connect(signer);
+                dcaContractWithSigner = dcaContract.connect(signer);
+
+                getPastPurchases(userAddress);
             }
         } catch (e) {
             console.log(e);
         }
     };
 
+
+    async function getPastPurchases(userAddress) {
+        try {
+            let events = await dcaContract.queryFilter("Purchase",
+                63796388,
+                63798368);
+            let userEvents = [];
+            for (let i = 0; i < events.length; i++) {
+                let event = events[i];
+                if (event.args[0] === userAddress) {
+                    userEvents.push(event);
+                }
+            }
+            setPurchases(userEvents);
+        } catch (e) {
+            console.log("Past purchases error: ");
+            console.log(e);
+            await getPastPurchases(userAddress);
+        }
+    }
+
     async function getGeneralData() {
         try {
+
             let supply = parseInt(await easyContract.totalSupply(), 10) / 10 ** 18;
 
             let reserves = await lpContract.getReserves();
             let usdcInLp = parseInt(reserves[0], 10) / 10 ** 6;
             let easyInLp = parseInt(reserves[1], 10) / 10 ** 18;
 
-            setEasySupply(supply);
-            setTotalBackups(parseInt(await backupContract.backupCount(), 10));
-            setDiscountedBackups(parseInt(await backupContract.discountedBackupCount(), 10));
-            setTotalUsers(parseInt(await backupContract.totalUsers(), 10));
-            setEasyPrice(usdcInLp / easyInLp);
             setTotalRefs(parseInt(await backupContract.referralBackupCount(), 10));
         } catch (e) {
             console.log("General methods error: ");
@@ -233,63 +252,6 @@ export default function Home() {
                                  easyContract={easyContract}
                                  refAddress={refAddress}
                                  totalRefs={totalRefs}/>
-
-                <div className={styles.mobilePadding} style={{width: '100%'}}>
-                    <div className={styles.backupInfoCard}>
-                        <p className={styles.boxTitle}>What is EasyBackup?</p>
-                        <p className={styles.sectionDescription}>EasyBackup is a protocol which lets you assign backup
-                            wallets
-                            for the tokens in your wallet. This way
-                            if you lose access to your wallet for any reason, the backup wallet will be able to
-                            transfer
-                            those
-                            tokens to itself. You never need to transfer your tokens to EasyBackup smart contract and
-                            only
-                            the
-                            backup wallet will be able transfer those tokens. Similarly, the backup system can be used
-                            for
-                            inheritance.</p>
-                        <p className={styles.boxTitle}>How to use?</p>
-                        <p className={styles.sectionDescription} style={{width: '100%'}}>- Select a token, amount,
-                            backup
-                            wallet, and access time.
-                            <br/></p>
-                        <p className={styles.sectionSmallDescription}>
-                            <b>Token: </b>The token you want the backup wallet to be able to access. You can choose from
-                            the
-                            list
-                            or use a custom token address.
-                            <br/>
-                            {/* eslint-disable-next-line react/no-unescaped-entities */}
-                            <b>Amount: </b>The amount of tokens the backup wallet can access. If you choose "infinite"
-                            the
-                            backup
-                            will able to access all, or you can limit the amount.
-                            <br/>
-                            <b>Backup Wallet: </b>The wallet which you want to be able to access your tokens.
-                            <br/>
-                            <b>Access Time: </b>The time which needs to pass before the backup becomes accessible. For
-                            example, choosing 1 year means, the backup wallet can transfer the specified tokens to
-                            itself 365 days after your last interaction with the contract.
-                            <br/>
-                            <b>Automatic Transfer: </b>If this option is enabled the funds will automatically get
-                            transferred to the backup wallet. Be extremely careful about enabling this option because
-                            loss of access to the backup wallet when automatic transfer is enabled may cause loss of
-                            funds.
-                            <br/><br/>
-                        </p>
-                        <p className={styles.sectionDescription}>- After the access time has passed, the backup wallet
-                            can
-                            claim
-                            those tokens from your wallet. You
-                            can reset the access time by interacting with the contract.
-                            <br/>
-                            - You need to complete two transactions, one for token approval, and the other one for
-                            creating
-                            the backup.
-                        </p>
-                    </div>
-                </div>
             </main>
 
             <p style={{fontSize: 12, color: 'gray', textAlign: 'center', padding: 32}}>EasyDCA is developed for <a
