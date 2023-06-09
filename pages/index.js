@@ -9,7 +9,7 @@ import 'semantic-ui-css/semantic.min.css'
 
 // Circular Progress Bar
 import 'react-circular-progressbar/dist/styles.css';
-import CreateBackupBox from "../components/CreateBackupBox";
+import CreateDCABox from "../components/CreateDCABox";
 import {USDC_ABI, USDC_ADDRESS, USDT_ADDRESS} from "../contracts/InProduction/USDC";
 import MainSection from "../components/MainSection";
 import {DCA_ABI, DCA_ADDRESS} from "../contracts/DCA";
@@ -143,13 +143,13 @@ export default function Home() {
             </Head>
             <main className={styles.main}>
                 <MainSection/>
-                <CreateBackupBox walletAddress={walletAddress}
-                                 connectWalletHandler={() => connectWalletHandler()}
-                                 provider={provider}
-                                 signer={signer}
+                <CreateDCABox walletAddress={walletAddress}
+                              connectWalletHandler={() => connectWalletHandler()}
+                              provider={provider}
+                              signer={signer}
 
-                                 dcaContract={dcaContract}
-                                 dcaContractWithSigner={dcaContractWithSigner}/>
+                              dcaContract={dcaContract}
+                              dcaContractWithSigner={dcaContractWithSigner}/>
             </main>
 
             <p style={{fontSize: 12, color: 'gray', textAlign: 'center', padding: 32}}>EasyDCA is developed for <a

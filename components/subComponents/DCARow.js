@@ -1,10 +1,34 @@
 import styles from "../../styles/Home.module.css";
 import {MONTHS, TOKEN_LOGOS, TOKEN_MAP} from "../../helpers/Constants";
 import React from "react";
+import {AiFillDelete} from "react-icons/ai";
+import {toast} from "react-hot-toast";
+import {ClipLoader} from "react-spinners";
 
 export default function DCARow(props) {
     let lastPurchase = new Date(props.dca.lastPurchase * 1000);
     let nextPurchase = new Date(props.dca.treshold * 1000);
+
+    const [isLoading, setIsLoading] = React.useState(false);
+
+    async function deleteDCA(id) {
+        try {
+            setIsLoading(true);
+            let tx = await props.dcaContractWithSigner.deleteDCA(id);
+            setListener(tx.hash);
+        } catch (e) {
+            console.log("Delete DCAs Error:");
+            console.log(e);
+        }
+    }
+
+    function setListener(txHash) {
+        props.provider.once(txHash, async (transaction) => {
+            toast.success("Successfully deleted the DCA strategy!");
+            await props.getDCAs();
+            setIsLoading(false);
+        })
+    }
 
     function getPeriodOption(period) {
         let text;
@@ -24,7 +48,7 @@ export default function DCARow(props) {
     }
 
     return (
-        <div className={styles.claimableBackupsRow} style={{backgroundColor: props.active ? "#ffffff" : "lightgrey"}}>
+        <div className={styles.dcaRowContainer} style={{backgroundColor: props.active ? "#ffffff" : "lightgrey"}}>
             <p className={styles.dcaNoText}><b>Stable
                 Amount: </b>{props.dca.amount}
             </p>
@@ -47,6 +71,13 @@ export default function DCARow(props) {
                 <p className={styles.dcaNoText} style={{marginLeft: 16}}><b>Next
                     Purchase:</b>{nextPurchase.getDate() + " " + MONTHS[nextPurchase.getMonth()] + ", " + nextPurchase.getFullYear()}
                 </p> : null}
+            {props.active ? <>
+                <div style={{flex: 1}}/>
+                {isLoading ? <ClipLoader size={22} color={'red'}/> :
+                    <AiFillDelete size={22} color={"red"} style={{cursor: 'pointer'}} onClick={() => {
+                        confirm("Are you sure you want to delete this DCA strategy? If you do so, automatic purchases will no longer happen for this strategy.") && deleteDCA(props.dca.id)
+                    }}/>}
+            </> : null}
         </div>
     )
 }

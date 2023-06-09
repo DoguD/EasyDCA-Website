@@ -2,6 +2,7 @@ import styles from "../styles/Home.module.css";
 import React from "react";
 import {MONTHS, TOKEN_DECIMALS, TOKEN_LOGOS} from "../helpers/Constants";
 import DCARow from "./subComponents/DCARow";
+import {toast} from "react-hot-toast";
 
 
 export default function ActiveDCA(props) {
@@ -15,7 +16,8 @@ export default function ActiveDCA(props) {
                     right now.</p>
                 : props.dcas.map((dca, index) =>
                     // eslint-disable-next-line react/jsx-key
-                    <DCARow dca={dca} active={true}/>
+                    <DCARow dca={dca} active={true} provider={props.provider}
+                            dcaContractWithSigner={props.dcaContractWithSigner} getDCAs={async () => await props.getDCAs()}/>
                 )
             }
         </>

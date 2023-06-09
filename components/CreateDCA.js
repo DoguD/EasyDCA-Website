@@ -154,7 +154,7 @@ export default function CreateDCA(props) {
             </div>
         </div>
         <div className={styles.rowNoMarginNoPadding}>
-            <div className={styles.mintButton}
+            <div className={styles.mainButton}
                  onClick={() => {
                      if (props.walletAddress === "") {
                          props.connectWalletHandler();
@@ -171,7 +171,7 @@ export default function CreateDCA(props) {
                 {
                     isLoading ?
                         <ClipLoader color={"white"} size={20}/> :
-                        <p className={styles.mintText}>
+                        <p className={styles.mainButtonText}>
                             {
                                 props.walletAddress === "" ? "Connect Wallet" :
                                     approvalNeeded ?

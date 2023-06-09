@@ -6,7 +6,7 @@ import {BiLinkExternal} from "react-icons/bi";
 export default function PastPurchaseRow(props) {
     let dt = new Date(props.purchase.timestamp * 1000);
     return (
-        <div className={styles.claimableBackupsRow}>
+        <div className={styles.dcaRowContainer}>
             <p className={styles.dcaNoText}><b>Purchase
                 Date: </b>{dt.getDate() + " " + MONTHS[dt.getMonth()] + ", " + dt.getFullYear()}</p>
 

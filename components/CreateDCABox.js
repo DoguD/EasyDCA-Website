@@ -1,25 +1,14 @@
 import styles from "../styles/Home.module.css";
 import React, {useEffect, useState} from 'react'
-import {Button, Dropdown} from 'semantic-ui-react';
-import {ethers} from "ethers";
-import {ERC20_ABI} from "../contracts/InProduction/ERC20";
-import {DEPLOY_BLOCK, TOKEN_MAP} from "../helpers/Constants";
+import {DEPLOY_BLOCK} from "../helpers/Constants";
 import PastPurchases from "./PastPurchases";
 import CreateDCA from "./CreateDCA";
 import ActiveDCA from "./ActiveDCA";
 import DeActiveDCA from "./DeActiveDCA";
 
 let tokenContract;
-let tokenContractWithSigner;
 
-let discountedUserOracle;
-
-let USDollar = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-});
-
-export default function CreateBackupBox(props) {
+export default function CreateDCABox(props) {
     const [purchases, setPurchases] = useState([]);
     const [activeDCAs, setActiveDCAs] = useState([]);
     const [deactivatedDCAs, setDeactivatedDCAs] = useState([]);
@@ -81,7 +70,8 @@ export default function CreateBackupBox(props) {
                 frequency: parseInt(dca[4], 10),
                 lastPurchase: parseInt(dca[5], 10),
                 treshold: parseInt(dca[6], 10),
-                isActive: dca[7]
+                isActive: dca[7],
+                id: dcaIndex
             }
 
             if (currentDCA.isActive) {
@@ -113,7 +103,11 @@ export default function CreateBackupBox(props) {
 
                        getLastPurchases={async () => await getPastPurchases(props.walletAddress)}
                        getDCAs={async () => await getDCAs(props.walletAddress)}/>
-            <ActiveDCA dcas={activeDCAs}/>
+            <ActiveDCA provider={props.provider}
+                       dcas={activeDCAs}
+                       dcaContractWithSigner={props.dcaContractWithSigner}
+                       getLastPurchases={async () => await getPastPurchases(props.walletAddress)}
+                       getDCAs={async () => await getDCAs(props.walletAddress)}/>
             <DeActiveDCA dcas={deactivatedDCAs}/>
             <PastPurchases purchases={purchases}/>
         </div>
