@@ -169,7 +169,7 @@ export default function CreateDCA(props) {
                      backgroundColor: props.walletAddress === "" || isValid() ? "#1a5df5" : 'lightgrey',
                      cursor: props.walletAddress === "" || isValid() ? "pointer" : "default",
                      width: 300,
-                     height: 50
+                     height: 60
                  }}>
                 {
                     isLoading ?

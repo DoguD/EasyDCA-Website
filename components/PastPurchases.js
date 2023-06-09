@@ -50,7 +50,7 @@ export default function PastPurchases(props) {
                                        style={{fontSize: 20, marginLeft: 24, marginTop: 16, marginBottom: 8}}>
                                         <b>Pair: </b>{key}</p>
                                     <p className={styles.dcaNoText} style={{marginLeft: 24}}><b>Total
-                                        Purchases: </b>{props.purchases.length}</p>
+                                        Purchases: </b>{purchaseDict[key].length}</p>
                                     <p className={styles.dcaNoText} style={{marginLeft: 24}}><b>Average Purchase
                                         Price: </b>{getAveragePurchase(purchaseDict[key])}</p>
                                     {

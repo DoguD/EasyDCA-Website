@@ -14,20 +14,18 @@ import {USDC_ABI, USDC_ADDRESS, USDT_ADDRESS} from "../contracts/InProduction/US
 import MainSection from "../components/MainSection";
 import {DCA_ABI, DCA_ADDRESS} from "../contracts/DCA";
 import {Toaster} from "react-hot-toast";
+import {useCookies} from "react-cookie";
 
 // Web3 Global Vars
 let provider;
 let signer;
 
-let usdcContract;
-let usdcContractWithSigner;
-let usdtContract;
-let usdtContractWithSigner;
-
 let dcaContract;
 let dcaContractWithSigner;
 
 export default function Home() {
+    // Cookie
+    const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
     const [walletAddress, setWalletAddress] = useState("");
     // UI Controllers
     const [metamaskInstalled, setMetamaskInstalled] = useState(false);
@@ -41,17 +39,19 @@ export default function Home() {
             window.ethereum.enable();
             provider = new ethers.providers.Web3Provider(window.ethereum, "any");
 
-            // CONTRACTS
-            usdcContract = new ethers.Contract(USDC_ADDRESS, USDC_ABI, provider);
-            usdtContract = new ethers.Contract(USDT_ADDRESS, USDC_ABI, provider);
-            dcaContract = new ethers.Contract(DCA_ADDRESS, DCA_ABI, provider);
+            // Got connected wallet if any
+            console.log("Cookies: ", cookies)
+            if (metamaskInstalled && typeof cookies['walletAddress'] !== "undefined") {
+                connectWalletHandler();
+            }
 
-            getGeneralData();
+            // CONTRACTS
+            dcaContract = new ethers.Contract(DCA_ADDRESS, DCA_ABI, provider);
         } else {
             console.log("Metamask not installed.");
             provider = new ethers.providers.getDefaultProvider("https://rpc.ftm.tools");
         }
-    }, [signer])
+    }, [signer, metamaskInstalled])
 
     // Network Change
     async function changeNetworkToFTM() {
@@ -94,37 +94,15 @@ export default function Home() {
             } else {
                 signer = provider.getSigner();
                 let userAddress = await signer.getAddress();
+                setCookie("walletAddress", userAddress);
+                console.log('Set Cookies', cookies);
                 setWalletAddress(userAddress);
-
-
-                usdcContractWithSigner = usdcContract.connect(signer);
-                usdtContractWithSigner = usdtContract.connect(signer);
                 dcaContractWithSigner = dcaContract.connect(signer);
-
             }
         } catch (e) {
             console.log(e);
         }
     };
-
-
-    async function getGeneralData() {
-        try {
-            console.log('hey')
-        } catch (e) {
-            console.log("General methods error: ");
-            console.log(e);
-            let chainId = await provider.getNetwork();
-            chainId = chainId['chainId'];
-            if (chainId !== 250) {
-                if (window.confirm("Please switch to Fantom Network to use EasyBlock.")) {
-                    await changeNetworkToFTM();
-                }
-            } else {
-                await getGeneralData();
-            }
-        }
-    }
 
     return (
         <div className={styles.container}>
