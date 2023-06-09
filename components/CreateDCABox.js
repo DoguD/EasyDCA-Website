@@ -94,7 +94,7 @@ export default function CreateDCABox(props) {
     }
 
     return (
-        <div className={styles.createBackupContainer}>
+        <div className={styles.createDcaContainer}>
             <CreateDCA provider={props.provider}
                        walletAddress={props.walletAddress}
                        connectWalletHandler={() => props.connectWalletHandler()}
