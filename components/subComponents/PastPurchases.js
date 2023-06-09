@@ -24,7 +24,7 @@ function PastPurchaseRow(props) {
 }
 
 export default function PastPurchases(props) {
-
+    console.log(props.purchases)
     return (
         <>
             <p className={styles.dcaTitle}>Your Past Purchases</p>

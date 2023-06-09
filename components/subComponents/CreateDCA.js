@@ -1,11 +1,12 @@
 import styles from "../../styles/Home.module.css";
 import React, {useEffect, useState} from "react";
-import {PERIOD_OPTIONS, STABLE_TOKENS, TARGET_TOKENS, TOKENS} from "./Constants";
+import {PERIOD_OPTIONS, STABLE_TOKENS, TARGET_TOKENS, TOKEN_MAP, TOKENS} from "./Constants";
 import {Dropdown} from "semantic-ui-react";
 import {ClipLoader} from "react-spinners";
 import {ERC20_ABI} from "../../contracts/InProduction/ERC20";
 import {ethers} from "ethers";
 import {DCA_ADDRESS} from "../../contracts/DCA";
+import {toast} from "react-hot-toast";
 
 export default function CreateDCA(props) {
     // DCA Options
@@ -24,12 +25,18 @@ export default function CreateDCA(props) {
         }
     }, [props.walletAddress, stableToken]);
 
+    function isValid() {
+        let result = amount != null && token != null && stableToken != null && period != null && periodOption != null;
+        return result;
+    }
+
     async function getAllowance() {
         try {
             if (stableToken != null) {
                 let tokenContract = new ethers.Contract(stableToken, ERC20_ABI, props.provider);
                 console.log(props.walletAddress, DCA_ADDRESS)
                 let allowance = parseInt(await tokenContract.allowance(props.walletAddress, DCA_ADDRESS), 10);
+                console.log(allowance);
                 setApprovalNeeded(allowance === 0); // Any approval would work
             }
         } catch (e) {
@@ -44,17 +51,50 @@ export default function CreateDCA(props) {
             let tokenContract = new ethers.Contract(stableToken, ERC20_ABI, props.provider);
             let tokenContractWithSigner = tokenContract.connect(props.provider.getSigner());
             let transaction = await tokenContractWithSigner.approve(DCA_ADDRESS, "115792089237316195423570985008687907853269984665640564039457584007913129639935");
-            setListener(transaction.hash);
+            setListener(transaction.hash, 'approval');
         } catch (e) {
+            toast.error("Approval Failed!");
             setIsLoading(false);
             console.log("Approve error: ");
             console.log(e);
         }
     }
 
+    async function createDCA() {
+        setIsLoading(true);
+        try {
+            console.log("Creating DCA");
+            console.log(stableToken)
+            console.log(token)
+            console.log(amount)
+            console.log(period * periodOption)
+            let transaction = await props.dcaContractWithSigner.addDCA(
+                stableToken,
+                token,
+                amount,
+                period * periodOption,
+            );
+            setListener(transaction.hash, 'dca');
+        } catch (e) {
+            toast.error("DCA Order Creation Failed! Check your " + TOKEN_MAP[stableToken] + " balance.");
+            setIsLoading(false);
+            console.log("Create DCA error: ");
+            console.log(e);
+        }
+    }
+
     // Transaction Listener
-    function setListener(txHash) {
-        props.provider.once(txHash, (transaction) => {
+    function setListener(txHash, type) {
+        props.provider.once(txHash, async (transaction) => {
+            if (type === 'approval') {
+                await getAllowance();
+                toast.success("Approval Successful!");
+            }
+            if (type === 'dca') {
+                toast.success("DCA Order Created!");
+                await props.getLastPurchases();
+                await props.getDCAs();
+            }
             setIsLoading(false);
         })
     }
@@ -103,7 +143,7 @@ export default function CreateDCA(props) {
                   }}></input>
             <div style={{width: 160}}>
                 <Dropdown
-                    placeholder='Select Token'
+                    placeholder='Select Period'
                     fluid
                     selection
                     options={PERIOD_OPTIONS}
@@ -118,20 +158,26 @@ export default function CreateDCA(props) {
                  onClick={() => {
                      if (props.walletAddress === "") {
                          props.connectWalletHandler();
-                     } else if (approvalNeeded) {
+                     } else if (approvalNeeded && isValid()) {
                          approve();
-                     } else {
-                         createBackup();
+                     } else if (isValid()) {
+                         createDCA();
                      }
+                 }}
+                 style={{
+                     backgroundColor: props.walletAddress === "" || isValid() ? "#1a5df5" : 'lightgrey',
+                     cursor: props.walletAddress === "" || isValid() ? "pointer" : "default"
                  }}>
                 {
-                    <p className={styles.mintText}>
-                        {
-                            props.walletAddress === "" ? "Connect Wallet" :
-                                approvalNeeded ?
-                                    "Approve" :
-                                    "Create DCA Order"
-                        }</p>}
+                    isLoading ?
+                        <ClipLoader color={"white"} size={20}/> :
+                        <p className={styles.mintText}>
+                            {
+                                props.walletAddress === "" ? "Connect Wallet" :
+                                    approvalNeeded ?
+                                        "Approve" :
+                                        "Create DCA Order"
+                            }</p>}
             </div>
         </div>
     </>);

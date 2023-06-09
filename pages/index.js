@@ -13,6 +13,7 @@ import CreateBackupBox from "../components/CreateBackupBox";
 import {USDC_ABI, USDC_ADDRESS, USDT_ADDRESS} from "../contracts/InProduction/USDC";
 import MainSection from "../components/MainSection";
 import {DCA_ABI, DCA_ADDRESS} from "../contracts/DCA";
+import {Toaster} from "react-hot-toast";
 
 // Web3 Global Vars
 let provider;
@@ -28,10 +29,8 @@ let dcaContractWithSigner;
 
 export default function Home() {
     const [walletAddress, setWalletAddress] = useState("");
-    const [purchases, setPurchases] = useState([]);
     // UI Controllers
     const [metamaskInstalled, setMetamaskInstalled] = useState(false);
-    const [totalRefs, setTotalRefs] = useState(0);
 
 
     // Web3
@@ -102,7 +101,6 @@ export default function Home() {
                 usdtContractWithSigner = usdtContract.connect(signer);
                 dcaContractWithSigner = dcaContract.connect(signer);
 
-                getPastPurchases(userAddress);
             }
         } catch (e) {
             console.log(e);
@@ -110,32 +108,6 @@ export default function Home() {
     };
 
 
-    async function getPastPurchases(userAddress) {
-        try {
-            let events = await dcaContract.queryFilter("Purchase",
-                63796388,
-                63798368);
-            let userEvents = [];
-            for (let i = 0; i < events.length; i++) {
-                let event = events[i];
-                if (event.args[0] === userAddress) {
-                    let currentPurchase = {};
-                    currentPurchase.address = event.args[0];
-                    currentPurchase.stableCoin = event.args[1];
-                    currentPurchase.targetCoin = event.args[2];
-                    currentPurchase.stableAmount = parseInt(event.args[3], 10);
-                    currentPurchase.targetAmount = parseInt(event.args[4], 10);
-                    currentPurchase.timestamp = parseInt(event.args[5], 10);
-                    userEvents.push(currentPurchase);
-                }
-            }
-            setPurchases(userEvents);
-        } catch (e) {
-            console.log("Past purchases error: ");
-            console.log(e);
-            await getPastPurchases(userAddress);
-        }
-    }
 
     async function getGeneralData() {
         try {
@@ -157,6 +129,7 @@ export default function Home() {
 
     return (
         <div className={styles.container}>
+            <Toaster/>
             <Head>
                 <title>EasyBackup - Never lose your crypto</title>
                 <meta name="description" content="DCA Into Crypto Easily"/>
@@ -174,8 +147,9 @@ export default function Home() {
                                  connectWalletHandler={() => connectWalletHandler()}
                                  provider={provider}
                                  signer={signer}
-                                 totalRefs={totalRefs}
-                                 purchases={purchases}/>
+
+                                 dcaContract={dcaContract}
+                                 dcaContractWithSigner={dcaContractWithSigner}/>
             </main>
 
             <p style={{fontSize: 12, color: 'gray', textAlign: 'center', padding: 32}}>EasyDCA is developed for <a
