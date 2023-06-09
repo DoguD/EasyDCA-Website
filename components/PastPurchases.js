@@ -31,36 +31,38 @@ export default function PastPurchases(props) {
     }
 
     return (
-        <>
-            <p className={styles.dcaTitle} style={{marginTop: 32}}>Your Past Purchases</p>
-            {props.purchases.length === 0 ?
-                // eslint-disable-next-line react/no-unescaped-entities
-                <p className={styles.dcaNoText}>Your DCA strategies hasn't made any purchases yet. Create one to start
-                    growing your crypto holdings
-                    right now.</p>
-                :
-                <>
-                    {
-                        Object.keys(purchaseDict).map((key, index) =>
-                            // eslint-disable-next-line react/jsx-key
-                            <>
-                                <p className={styles.dcaNoText}
-                                   style={{fontSize: 20, marginLeft: 24, marginTop: 16, marginBottom: 8}}>
-                                    <b>Pair: </b>{key}</p>
-                                <p className={styles.dcaNoText} style={{marginLeft: 24}}><b>Total
-                                    Purchases: </b>{props.purchases.length}</p>
-                                <p className={styles.dcaNoText} style={{marginLeft: 24}}><b>Average Purchase
-                                    Price: </b>{getAveragePurchase(purchaseDict[key])}</p>
-                                {
-                                    purchaseDict[key].map((purchase, index) =>
-                                        // eslint-disable-next-line react/jsx-key
-                                        <PastPurchaseRow purchase={purchase}/>
-                                    )
-                                }
-                            </>
-                        )
-                    }
-                </>
-            }
-        </>);
+        props.purchases.length === 0 ? null :
+            <>
+                <p className={styles.dcaTitle} style={{marginTop: 32}}>Your Past Purchases</p>
+                {props.purchases.length === 0 ?
+                    // eslint-disable-next-line react/no-unescaped-entities
+                    <p className={styles.dcaNoText}>Your DCA strategies hasn't made any purchases yet. Create one to
+                        start
+                        growing your crypto holdings
+                        right now.</p>
+                    :
+                    <>
+                        {
+                            Object.keys(purchaseDict).map((key, index) =>
+                                // eslint-disable-next-line react/jsx-key
+                                <>
+                                    <p className={styles.dcaNoText}
+                                       style={{fontSize: 20, marginLeft: 24, marginTop: 16, marginBottom: 8}}>
+                                        <b>Pair: </b>{key}</p>
+                                    <p className={styles.dcaNoText} style={{marginLeft: 24}}><b>Total
+                                        Purchases: </b>{props.purchases.length}</p>
+                                    <p className={styles.dcaNoText} style={{marginLeft: 24}}><b>Average Purchase
+                                        Price: </b>{getAveragePurchase(purchaseDict[key])}</p>
+                                    {
+                                        purchaseDict[key].map((purchase, index) =>
+                                            // eslint-disable-next-line react/jsx-key
+                                            <PastPurchaseRow purchase={purchase}/>
+                                        )
+                                    }
+                                </>
+                            )
+                        }
+                    </>
+                }
+            </>);
 }

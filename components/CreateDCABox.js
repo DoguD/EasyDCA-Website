@@ -103,13 +103,16 @@ export default function CreateDCABox(props) {
 
                        getLastPurchases={async () => await getPastPurchases(props.walletAddress)}
                        getDCAs={async () => await getDCAs(props.walletAddress)}/>
-            <ActiveDCA provider={props.provider}
-                       dcas={activeDCAs}
-                       dcaContractWithSigner={props.dcaContractWithSigner}
-                       getLastPurchases={async () => await getPastPurchases(props.walletAddress)}
-                       getDCAs={async () => await getDCAs(props.walletAddress)}/>
-            <DeActiveDCA dcas={deactivatedDCAs}/>
-            <PastPurchases purchases={purchases}/>
+            {props.walletAddress === "" ? null :
+                <>
+                    <ActiveDCA provider={props.provider}
+                               dcas={activeDCAs}
+                               dcaContractWithSigner={props.dcaContractWithSigner}
+                               getLastPurchases={async () => await getPastPurchases(props.walletAddress)}
+                               getDCAs={async () => await getDCAs(props.walletAddress)}/>
+                    <DeActiveDCA dcas={deactivatedDCAs}/>
+                    <PastPurchases purchases={purchases}/>
+                </>}
         </div>
     );
 }
