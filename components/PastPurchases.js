@@ -12,10 +12,15 @@ export default function PastPurchases(props) {
                 <p className={styles.dcaNoText}>Your DCA strategies hasn't made any purchases yet. Create one to start
                     growing your crypto holdings
                     right now.</p>
-                : props.purchases.map((purchase, index) =>
-                    // eslint-disable-next-line react/jsx-key
-                    <PastPurchaseRow purchase={purchase}/>
-                )
+                :
+                <><p className={styles.dcaNoText}><b>Total Purchases: </b>{props.purchases.length}</p>
+                    {
+                        props.purchases.map((purchase, index) =>
+                            // eslint-disable-next-line react/jsx-key
+                            <PastPurchaseRow purchase={purchase}/>
+                        )
+                    }
+                </>
             }
         </>);
 }
