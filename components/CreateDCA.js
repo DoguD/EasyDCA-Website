@@ -100,7 +100,8 @@ export default function CreateDCA(props) {
     }
 
     return (<>
-        <p className={styles.dcaTitle} style={{width: '100%', textAlign: 'center', marginBottom: 32}}>Create new DCA Order</p>
+        <p className={styles.dcaTitle} style={{width: '100%', textAlign: 'center', marginBottom: 32}}>Create new DCA
+            Order</p>
         <div className={styles.rowNoMarginNoPadding}>
             <p className={styles.dcaCreationText}>I want to buy </p>
             <input className={styles.basicInput} type={"text"} id={"dca-amount"}
@@ -166,11 +167,13 @@ export default function CreateDCA(props) {
                  }}
                  style={{
                      backgroundColor: props.walletAddress === "" || isValid() ? "#1a5df5" : 'lightgrey',
-                     cursor: props.walletAddress === "" || isValid() ? "pointer" : "default"
+                     cursor: props.walletAddress === "" || isValid() ? "pointer" : "default",
+                     width: 300,
+                     height: 50
                  }}>
                 {
                     isLoading ?
-                        <ClipLoader color={"white"} size={20}/> :
+                        <ClipLoader color={"white"} size={24}/> :
                         <p className={styles.mainButtonText}>
                             {
                                 props.walletAddress === "" ? "Connect Wallet" :

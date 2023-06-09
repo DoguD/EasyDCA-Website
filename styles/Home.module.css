@@ -3,7 +3,6 @@
 }
 
 .main {
-    min-height: 100vh;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -65,7 +64,7 @@
 .mainButtonText {
     color: #ffffff;
     margin: 0;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 
@@ -105,7 +104,7 @@
     flex-grow: 0;
     margin: 0;
     padding: 24px 0 0;
-    background-image: radial-gradient(circle at 50% 50%, rgba(46, 121, 243, 0.93), #1459f4 49%);
+    background-image: radial-gradient(circle at 50% 50%, rgba(46, 121, 243, 0.7), #1459f4 49%);
 
     display: flex;
     flex-direction: column;
