@@ -139,7 +139,7 @@ export default function Home() {
 
     async function getGeneralData() {
         try {
-            console.log(getGeneralData())
+            console.log('hey')
         } catch (e) {
             console.log("General methods error: ");
             console.log(e);

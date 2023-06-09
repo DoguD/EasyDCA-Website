@@ -11,6 +11,7 @@ export default function CreateDCA(props) {
     // DCA Options
     const [amount, setAmount] = useState();
     const [token, setToken] = useState();
+    const [stableToken, setStableToken] = useState();
     const [period, setPeriod] = useState();
     const [periodOption, setPeriodOption] = useState();
     // UI Controllers
@@ -21,14 +22,16 @@ export default function CreateDCA(props) {
         if (props.walletAddress !== "") {
             getAllowance();
         }
-    }, [props.walletAddress]);
+    }, [props.walletAddress, stableToken]);
 
     async function getAllowance() {
         try {
-            let tokenContract = new ethers.Contract(token, ERC20_ABI, props.provider);
-            console.log(props.walletAddress, DCA_ADDRESS)
-            let allowance = parseInt(await tokenContract.allowance(props.walletAddress, DCA_ADDRESS), 10);
-            setApprovalNeeded(allowance === 0); // Any approval would work
+            if (stableToken != null) {
+                let tokenContract = new ethers.Contract(stableToken, ERC20_ABI, props.provider);
+                console.log(props.walletAddress, DCA_ADDRESS)
+                let allowance = parseInt(await tokenContract.allowance(props.walletAddress, DCA_ADDRESS), 10);
+                setApprovalNeeded(allowance === 0); // Any approval would work
+            }
         } catch (e) {
             console.log("Get Allowance Error:");
             console.log(e);
@@ -38,6 +41,8 @@ export default function CreateDCA(props) {
     async function approve() {
         setIsLoading(true);
         try {
+            let tokenContract = new ethers.Contract(stableToken, ERC20_ABI, props.provider);
+            let tokenContractWithSigner = tokenContract.connect(props.provider.getSigner());
             let transaction = await tokenContractWithSigner.approve(DCA_ADDRESS, "115792089237316195423570985008687907853269984665640564039457584007913129639935");
             setListener(transaction.hash);
         } catch (e) {
@@ -85,7 +90,7 @@ export default function CreateDCA(props) {
                     selection
                     options={STABLE_TOKENS}
                     onChange={(e, {value}) => {
-                        setToken(value);
+                        setStableToken(value);
                     }}
                 />
             </div>
