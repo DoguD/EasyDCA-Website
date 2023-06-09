@@ -105,7 +105,7 @@ export default function CreateDCA(props) {
             <p className={styles.dcaCreationText}>I want to buy </p>
             <input className={styles.basicInput} type={"text"} id={"backup-amount"}
                    value={amount}
-                   placeholder={"10"}
+                   placeholder={""}
                    onChange={(b) => {
                        setAmount(b.target.value)
                    }}>
@@ -137,7 +137,7 @@ export default function CreateDCA(props) {
             <p className={styles.dcaCreationText}>every</p><
             input className={styles.basicInput} type={"text"} id={"backup-amount"}
                   value={period}
-                  placeholder={"7"}
+                  placeholder={""}
                   onChange={(b) => {
                       setPeriod(b.target.value)
                   }}></input>
