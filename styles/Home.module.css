@@ -1,0 +1,718 @@
+/* FONTS START */
+/* FONTS END */
+
+.container {
+    padding: 0;
+}
+
+.main {
+    min-height: 100vh;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 4rem;
+}
+
+.mobilePadding {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.description {
+    text-align: center;
+    line-height: 1.5;
+    font-size: 1.5rem;
+    margin: 1rem 0 0;
+}
+
+.description-emphasis {
+    font-weight: bold;
+}
+
+.grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.claimableBackupsContainer {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.claimableBackupsRow {
+    padding: 4px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin: 1rem;
+    text-align: left;
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    height: 60px;
+}
+
+.claimableBackupText {
+    font-size: 16px;
+    margin: 0 4px;
+}
+
+.toAddress {
+    font-size: 16px;
+    margin: 0 4px;
+}
+
+.nftGrid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 800px;
+}
+
+.card {
+    margin: 1rem;
+    padding: 1.5rem;
+    text-align: left;
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    max-width: 300px;
+}
+
+.card:hover,
+.card:focus,
+.card:active {
+    color: #3a70ed;
+    border-color: #3a70ed;
+}
+
+.stakingCard {
+    margin: 1rem;
+    padding: 20px 40px;
+    text-align: left;
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+}
+
+.stakingInnerCard {
+    margin: 1rem;
+    padding: 20px;
+    color: inherit;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: #b3e5fc;
+}
+
+.stakingButton {
+    border: 1px solid #7f7f7f;
+    border-radius: 4px;
+    padding: 2px;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
+    cursor: pointer;
+}
+
+.stakingButtonText {
+    color: #424242;
+}
+
+.stakingTitle {
+    margin: 16px 0 0;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.stakingText {
+    margin: 4px 0 0;
+    font-size: 20px;
+}
+
+.learnMore {
+}
+
+.learnMore:hover,
+.learnMore:focus,
+.learnMore:active {
+    color: #3a70ed;
+    border-color: #3a70ed;
+}
+
+
+.card h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.logo {
+    height: 1em;
+    margin-left: 0.5rem;
+}
+
+.description-emphasis {
+    font-weight: bold;
+}
+
+.line {
+    background-color: black;
+    height: 2px;
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 2rem;
+}
+
+.iconContainer {
+    padding-right: 32px;
+    position: absolute;
+    right: 0;
+}
+
+@media (max-width: 600px) {
+    .iconContainer {
+        visibility: hidden;
+    }
+}
+
+.subTitle {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.boxTitle {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.sectionDescription {
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.sectionSmallDescription {
+    font-size: 0.9rem;
+}
+
+.presaleDescription {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.navbarTitleContainer {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.paintSwapLogo {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+}
+
+.generationText {
+    margin-top: 0;
+    margin-bottom: 4px;
+}
+
+.mintButton {
+    margin-top: 1rem;
+    padding: 16px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+@media (max-width: 600px) {
+    .referralBox {
+        width: 100%
+    }
+}
+
+.mintText {
+    color: #3a70ed;
+    margin: 0;
+    font-size: 24px;
+}
+
+.mintCountController {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+
+    margin: 1rem 0 0;
+}
+
+.mintCountButton {
+    margin: 0 8px;
+    cursor: pointer;
+}
+
+
+.mintCountTitle {
+    font-size: 24px;
+    margin: 0;
+}
+
+.mintCostText {
+    font-size: 16px;
+    margin: 0;
+    margin-top: 4px;
+    text-align: center;
+}
+
+.nftBox {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 16px;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 3px 8px;
+    width: 160px;
+    height: 250px;
+}
+
+@media (max-width: 600px) {
+    .nftBox {
+        margin: 4px 4px 16px;
+        width: 140px;
+    }
+}
+
+.longBanner {
+    width: 100%;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .longBanner {
+        display: none;
+    }
+}
+
+.shortBanner {
+    width: 100%;
+    margin: 0;
+}
+
+@media (min-width: 600px) {
+    .shortBanner {
+        display: none;
+    }
+}
+
+.card h2 {
+    color: #3a70ed
+}
+
+.entryText {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.winningChanceText {
+    color: #3a70ed;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.discountNotificationText {
+    color: #3a70ed;
+    font-weight: bold;
+}
+
+.input {
+    border: 1px solid #afafaf;
+    border-radius: 20px;
+    font-size: 24px;
+    margin: 0 0 0 8px;
+    padding: 4px;
+    text-align: center;
+}
+
+.walletInput {
+    border: 1px solid #afafaf;
+    border-radius: 20px;
+    font-size: 16px;
+    margin: 0;
+    padding: 4px;
+    text-align: center;
+    width: 100%;
+}
+
+.backupCreationCard {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    padding: 1.5rem;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.backupInfoCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    padding: 1.5rem;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.backupRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 16px;
+}
+
+.backupTitle {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 8px 0 0;
+}
+
+.balanceText {
+    margin: 0;
+}
+
+.menuText {
+    text-decoration: underline;
+    margin-right: 24px;
+    margin-left: 24px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.presaleTimer {
+    font-size: 100px;
+    color: #3a70ed;
+}
+
+.bannerImage {
+    width: 100%;
+    margin-top: 58px;
+    margin-bottom: 16px;
+}
+
+.descriptionContainer {
+    background-color: #3a70ed;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 96px 24px 24px;
+}
+
+@media (max-width: 600px) {
+    .menuText {
+        font-size: 20px;
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+    .card {
+        height: unset;
+        margin: 8px;
+        padding: 8px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .stakingCard {
+        margin: 0;
+        width: 320px;
+        padding: 8px;
+    }
+
+    .presaleTimer {
+        font-size: 72px;
+    }
+
+    .bannerImage {
+        display: none;
+    }
+
+    .description {
+        font-size: 1.2rem;
+        color: white;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    .mobilePadding {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .claimableBackupsRow {
+        display: unset;
+        padding: 8px;
+        margin-left: 0;
+        margin-right: 0;
+
+        text-align: center;
+        height: unset;
+    }
+
+    .claimableBackupsContainer {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .toAddress {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 600px) {
+    .description {
+        display: none;
+    }
+
+    .descriptionContainer {
+        display: none;
+    }
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+/*Main color: #3a70ed*/
+
+
+/*NEW DESIGN*/
+.rowNoMarginNoPadding {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.colFlex1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+/*MAIN SECTION START*/
+.mainBackground {
+    width: 100%;
+    height: 800px;
+    flex-grow: 0;
+    margin: 0;
+    padding: 24px 0 0;
+    background-image: radial-gradient(circle at 50% 50%, rgba(46, 121, 243, 0.93), #1459f4 49%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.navbar {
+    width: 100%;
+    height: 80px;
+
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 88px;
+}
+
+.navbarTitle {
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+    color: #fff;
+    margin: 0 0 0 8px;
+}
+
+.navbarIcon {
+    margin-right: 8px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.getTokenText {
+    cursor: pointer;
+    margin: 0 8px 0 0;
+    font-family: DMSans;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #fff;
+}
+
+.mainTitle {
+    margin: 0 0 32px;
+    font-family: Inter;
+    font-size: 60px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #fff;
+}
+
+.mainText {
+    font-family: OpenSans, sans-serif;
+    font-size: 32px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.31;
+    letter-spacing: normal;
+    text-align: left;
+    color: #fff;
+    margin-top: 0;
+}
+
+.mainInnerContainer {
+    padding: 30px 32px 0;
+    border-radius: 16px;
+    background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0), #fff 96%);
+    width: 100%;
+}
+
+.mainInnerRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 0 32px;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: #fff;
+}
+
+.mainIcon {
+    width: 40px;
+    height: 40px;
+}
+
+.mainInnerNumber {
+    flex-grow: 0;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    color: #9c9cab;
+    margin: 0 20px 0 16px;
+    text-align: center;
+}
+
+.mainInnerText {
+    font-family: OpenSans, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: 0;
+    text-align: left;
+    color: #000;
+    margin: 0;
+}
+
+/*MAIN SECTION END*/
+
+/* CREATE BACKUP START */
+.createBackupContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 32px 64px 40px;
+    border-radius: 20px;
+    border: solid 1px #f0f1f3;
+    background-color: #fff;
+    width: 1240px;
+    margin: -128px 0 0;
+}
+
+/* CREATE BACKUP END */
+
+.dcaTitle {
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2;
+    text-align: left;
+    color: #111827;
+}
