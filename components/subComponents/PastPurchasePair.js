@@ -33,12 +33,13 @@ export default function PastPurchasePair(props) {
                 </p>
                 <img src={TOKEN_LOGOS_FROM_NAME[props.pair.split("-")[0]]}
                      style={{marginLeft: 2, marginRight: 0, width: 20}}/>
-                <p className={styles.dcaNoText} style={{marginLeft: 24}}><b>Purchase
-                    Count: </b>{props.purchaseDict.length}</p>
-                <p className={styles.dcaNoText} style={{marginLeft: 24}}><b>Average
-                    Price: </b>${getAveragePurchase(props.purchaseDict)}</p>
+                <p className={styles.dcaNoText} style={{marginLeft: 24, fontSize: 20}}><span style={{fontWeight: 600}}>Purchase
+                    Count:</span> {props.purchaseDict.length}</p>
+                <p className={styles.dcaNoText} style={{marginLeft: 24, fontSize: 20}}><span style={{fontWeight: 600}}>Average
+                    Price: </span>${getAveragePurchase(props.purchaseDict)}</p>
+                <div style={{flex: 1}}/>
                 {open ?
-                    <AiOutlineCaretUp size={24} style={{marginLeft: 16, cursor: "pointer", marginTop: -4}}
+                    <AiOutlineCaretUp size={22} style={{cursor: "pointer", margin: 0}}
                                       onClick={() => {
                                           setOpen(false)
                                       }}/>
