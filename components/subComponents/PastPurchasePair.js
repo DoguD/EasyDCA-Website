@@ -25,13 +25,13 @@ export default function PastPurchasePair(props) {
                 marginTop: 40
             }}>
                 <p className={styles.dcaNoText}
-                   style={{fontSize: 20}}>{props.pair.split("-")[0]}
-                </p>
-                <img src={TOKEN_LOGOS_FROM_NAME[props.pair.split("-")[0]]}
+                   style={{fontSize: 20}}>{props.pair.split("-")[1]}</p>
+                <img src={TOKEN_LOGOS_FROM_NAME[props.pair.split("-")[1]]}
                      style={{marginLeft: 2, marginRight: 4, width: 20}}/>
                 <p className={styles.dcaNoText}
-                   style={{fontSize: 20}}>/ {props.pair.split("-")[1]}</p>
-                <img src={TOKEN_LOGOS_FROM_NAME[props.pair.split("-")[1]]}
+                   style={{fontSize: 20}}> / {props.pair.split("-")[0]}
+                </p>
+                <img src={TOKEN_LOGOS_FROM_NAME[props.pair.split("-")[0]]}
                      style={{marginLeft: 2, marginRight: 0, width: 20}}/>
                 <p className={styles.dcaNoText} style={{marginLeft: 24}}><b>Purchase
                     Count: </b>{props.purchaseDict.length}</p>
