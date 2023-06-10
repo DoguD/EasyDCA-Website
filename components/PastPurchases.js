@@ -1,8 +1,6 @@
 import styles from "../styles/Home.module.css";
 import React, {useEffect, useState} from "react";
-import PastPurchaseRow from "./subComponents/PastPurchaseRow";
-import {TOKEN_DECIMALS, TOKEN_LOGOS_FROM_NAME, TOKEN_MAP} from "../helpers/Constants";
-import {AiOutlineCaretDown} from "react-icons/all";
+import {TOKEN_MAP} from "../helpers/Constants";
 import PastPurchasePair from "./subComponents/PastPurchasePair";
 
 

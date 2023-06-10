@@ -1,8 +1,8 @@
 import styles from "../../styles/Home.module.css";
 import {TOKEN_DECIMALS, TOKEN_LOGOS_FROM_NAME} from "../../helpers/Constants";
-import {AiOutlineCaretDown, AiOutlineCaretUp} from "react-icons/all";
+import {AiOutlineCaretDown, AiOutlineCaretUp} from "react-icons/ai";
 import PastPurchaseRow from "./PastPurchaseRow";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
 export default function PastPurchasePair(props) {
     const [open, setOpen] = useState(false);
