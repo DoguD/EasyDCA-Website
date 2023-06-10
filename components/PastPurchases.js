@@ -27,7 +27,7 @@ export default function PastPurchases(props) {
         for (let i = 0; i < purchases.length; i++) {
             total += (purchases[i].targetAmount / (10 ** TOKEN_DECIMALS[purchases[i].targetCoin]));
         }
-        return (total / purchases.length).toFixed(4) + " USD per " + TOKEN_MAP[purchases[0].targetCoin];
+        return (1 / (total / purchases.length)).toFixed(4) + " USD per " + TOKEN_MAP[purchases[0].targetCoin];
     }
 
     return (
