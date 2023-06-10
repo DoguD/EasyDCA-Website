@@ -6,7 +6,7 @@ export default function MainSection(props) {
     return (
         <div className={styles.mainBackground}>
             <NavBar/>
-            <div className={styles.rowNoMarginNoPadding} style={{width: 1240, alignItems: 'center'}}>
+            <div className={styles.rowNoMarginNoPadding} style={{width: 1400, alignItems: 'center'}}>
                 <div className={styles.colFlex1} style={{paddingRight: 24}}>
                     <p className={styles.mainTitle}>Dolar-Cost-Average into Crypto Easily</p>
                     <p className={styles.mainText}>DCA and grow your crypto holdings without needing Centralized Exchanges</p>
