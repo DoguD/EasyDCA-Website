@@ -6,7 +6,7 @@ export default function DeActiveDCA(props) {
     return (
         props.dcas.length === 0 ? null :
             <>
-                <p className={styles.dcaTitle} style={{marginTop: 32}}>Disabled DCA Strategies</p>
+                <p className={styles.dcaTitle} style={{width: '100%', textAlign: 'center'}}>Disabled DCA Strategies</p>
                 <p className={styles.dcaNoText}>
                     {"These are your deactivated DCA orders which are not currently running. If you don't have enough coins or approval for that coin at the time of purchase, DCA orders get deactivated automatically."}</p>
                 {

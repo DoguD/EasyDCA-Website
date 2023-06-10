@@ -12,7 +12,8 @@ export default function ActiveDCA(props) {
     return (
         props.dcas.length === 0 ? null :
             <>
-                <p className={styles.dcaTitle} style={{marginTop: 32}}>Your Active DCA Strategies</p>
+                <p className={styles.dcaTitle} style={{width: '100%', textAlign: 'center'}}>Your Active
+                    DCA Strategies</p>
                 {props.dcas.length === 0 ?
                     // eslint-disable-next-line react/no-unescaped-entities
                     <p className={styles.dcaNoText}>Your don't have any active. Create one to start

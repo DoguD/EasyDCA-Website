@@ -160,6 +160,18 @@ export const TOKEN_LOGOS = {
     '0x85dec8c4B2680793661bCA91a8F129607571863d': '/brush.webp',
 }
 
+export const TOKEN_LOGOS_FROM_NAME = {
+    'wETH': '/weth.webp',
+    'wFTM': '/wftm.webp',
+    'USDC': '/usdc.png',
+    'DAI': '/dai.png',
+    'fUSDT': '/fUSDT.png',
+    'BOO': '/boo.png',
+    'BNB': '/bnb.png',
+    'AVAX': '/AVAX.png',
+    'BRUSH': '/brush.webp',
+}
+
 export const MONTHS = [
     'January',
     'February',
