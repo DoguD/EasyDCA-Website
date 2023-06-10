@@ -1,6 +1,6 @@
 import styles from "../styles/Home.module.css";
 import React, {useEffect, useState} from "react";
-import {PERIOD_OPTIONS, STABLE_TOKENS, TARGET_TOKENS, TOKEN_MAP, TOKENS} from "../helpers/Constants";
+import {PERIOD_OPTIONS, STABLE_TOKENS, TARGET_TOKENS, TOKEN_DECIMALS, TOKEN_MAP, TOKENS} from "../helpers/Constants";
 import {Dropdown} from "semantic-ui-react";
 import {ClipLoader} from "react-spinners";
 import {ERC20_ABI} from "../contracts/InProduction/ERC20";
@@ -16,7 +16,9 @@ export default function CreateDCA(props) {
     const [period, setPeriod] = useState();
     const [periodOption, setPeriodOption] = useState();
     // UI Controllers
+    const [balance, setBalance] = useState(null);
     const [approvalNeeded, setApprovalNeeded] = useState(true);
+    const [allowance, setAllowance] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -35,9 +37,11 @@ export default function CreateDCA(props) {
             if (stableToken != null) {
                 let tokenContract = new ethers.Contract(stableToken, ERC20_ABI, props.provider);
                 console.log(props.walletAddress, DCA_ADDRESS)
-                let allowance = parseInt(await tokenContract.allowance(props.walletAddress, DCA_ADDRESS), 10);
-                console.log('Allowance', allowance);
-                setApprovalNeeded(allowance === 0); // Any approval would work
+                let allowance = Math.floor(parseInt(await tokenContract.allowance(props.walletAddress, DCA_ADDRESS), 10) / 10 ** TOKEN_DECIMALS[stableToken]);
+                setAllowance(allowance);
+                setApprovalNeeded(amount == null ? allowance === 0 : allowance < amount);
+                let balance = Math.floor(parseInt(await tokenContract.balanceOf(props.walletAddress), 10) / 10 ** TOKEN_DECIMALS[stableToken]);
+                setBalance(balance);
             }
         } catch (e) {
             console.log("Get Allowance Error:");
@@ -102,13 +106,15 @@ export default function CreateDCA(props) {
     return (<>
         <p className={styles.dcaTitle} style={{width: '100%', textAlign: 'center', marginBottom: 32}}>Create new DCA
             Order</p>
-        <div className={styles.rowNoMarginNoPadding}>
+        <div className={styles.rowNoMarginNoPadding} style={{marginBottom: 32}}>
             <p className={styles.dcaCreationText}>I want to buy </p>
             <input className={styles.basicInput} type={"text"} id={"dca-amount"}
                    value={amount}
                    placeholder={""}
                    onChange={(b) => {
-                       setAmount(b.target.value)
+                       setAmount(b.target.value);
+                       console.log(allowance, parseInt(b.target.value))
+                       setApprovalNeeded(allowance < parseInt(b.target.value));
                    }}>
             </input>
             <p className={styles.dcaCreationText}>USD worth of</p>
@@ -154,6 +160,15 @@ export default function CreateDCA(props) {
                 />
             </div>
         </div>
+        {balance != null && amount != null && !approvalNeeded ?
+            allowance > balance ?
+                <p className={styles.dcaCreationText} style={{textAlign: 'center', fontSize: 16, marginBottom: 8}}>You
+                    have {balance} {TOKEN_MAP[stableToken]} in your wallet, <b>enough
+                        for {Math.floor(balance / amount)} purchases.</b></p> :
+                <p className={styles.dcaCreationText} style={{textAlign: 'center', fontSize: 16, marginBottom: 8}}>You
+                    approved for spending of {allowance} {TOKEN_MAP[stableToken]}, <b>enough
+                        for {Math.floor(allowance / amount)} purchases.</b></p>
+            : null}
         <div className={styles.rowNoMarginNoPadding}>
             <div className={styles.mainButton}
                  onClick={() => {
@@ -183,5 +198,6 @@ export default function CreateDCA(props) {
                             }</p>}
             </div>
         </div>
-    </>);
+    </>)
+        ;
 }

@@ -124,7 +124,9 @@ export default function Home() {
 
             <div className={styles.rowNoMarginNoPadding} style={{marginTop: 32}}>
                 <p className={styles.dcaCreationText} style={{marginRight: 16}}>Powered by</p>
-                <img src={'/chainlinkAutomation.svg'} style={{width: 300}}/>
+                <a href={'https://automation.chain.link'} style={{cursor: 'pointer'}} target={"_blank"} rel={"noreferrer"}>
+                    <img src={'/chainlinkAutomation.svg'} style={{width: 300}}/>
+                </a>
             </div>
 
             <p style={{fontSize: 12, color: 'gray', textAlign: 'center', padding: 32}}>EasyDCA is developed for <a
