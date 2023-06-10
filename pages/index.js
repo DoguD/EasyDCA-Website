@@ -108,7 +108,7 @@ export default function Home() {
         <div className={styles.container}>
             <Toaster/>
             <Head>
-                <title>EasyDCA - Never lose your crypto</title>
+                <title>EasyDCA - DCA and Grow Your Crypto decentrally</title>
                 <meta name="description" content="DCA Into Crypto Easily"/>
             </Head>
             <main className={styles.main}>
