@@ -124,7 +124,8 @@ export default function Home() {
 
             <div className={styles.rowNoMarginNoPadding} style={{marginTop: 32}}>
                 <p className={styles.dcaCreationText} style={{marginRight: 16}}>Powered by</p>
-                <a href={'https://automation.chain.link'} style={{cursor: 'pointer'}} target={"_blank"} rel={"noreferrer"}>
+                <a href={'https://automation.chain.link'} style={{cursor: 'pointer'}} target={"_blank"}
+                   rel={"noreferrer"}>
                     <img src={'/chainlinkAutomation.svg'} style={{width: 300}}/>
                 </a>
             </div>
@@ -132,7 +133,10 @@ export default function Home() {
             <p style={{fontSize: 12, color: 'gray', textAlign: 'center', padding: 32}}>EasyDCA is developed for <a
                 href={"https://chainlinkspring2023.devpost.com/"} target={"_blank"} rel={'noreferrer'}>ChainLink
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
-                Spring Hackathon</a> and hasn't been audited yet. Use with caution.</p>
+                Spring Hackathon</a> and hasn't been audited yet. Use with caution.<br/>
+                <a href={"https://ftmscan.com/address/" + DCA_ADDRESS + "#code"} target={"_blank"} rel={'noreferrer'}>Our
+                    smart-contract</a> is open-source, you can check it out.
+            </p>
         </div>
     )
 }
