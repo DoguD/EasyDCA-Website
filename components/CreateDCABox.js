@@ -84,15 +84,6 @@ export default function CreateDCABox(props) {
         setDeactivatedDCAs(deactivatedDCAs);
     }
 
-    async function getBalance(decimal) {
-        try {
-            setBalance(parseInt(await tokenContract.balanceOf(props.walletAddress), 10) / 10 ** decimal);
-        } catch (e) {
-            console.log("DCA Box, get allowance error:");
-            console.log(e);
-        }
-    }
-
     return (
         <div className={styles.createDcaContainer}>
             <CreateDCA provider={props.provider}
@@ -105,11 +96,13 @@ export default function CreateDCABox(props) {
                        getDCAs={async () => await getDCAs(props.walletAddress)}/>
             {props.walletAddress === "" ? null :
                 <>
-                    <ActiveDCA provider={props.provider}
-                               dcas={activeDCAs}
-                               dcaContractWithSigner={props.dcaContractWithSigner}
-                               getLastPurchases={async () => await getPastPurchases(props.walletAddress)}
-                               getDCAs={async () => await getDCAs(props.walletAddress)}/>
+                    <ActiveDCA
+                        walletAddress={props.walletAddress}
+                        provider={props.provider}
+                        dcas={activeDCAs}
+                        dcaContractWithSigner={props.dcaContractWithSigner}
+                        getLastPurchases={async () => await getPastPurchases(props.walletAddress)}
+                        getDCAs={async () => await getDCAs(props.walletAddress)}/>
                     <DeActiveDCA dcas={deactivatedDCAs}/>
                     <PastPurchases purchases={purchases}/>
                 </>}

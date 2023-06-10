@@ -3,6 +3,9 @@ import React from "react";
 import {MONTHS, TOKEN_DECIMALS, TOKEN_LOGOS} from "../helpers/Constants";
 import DCARow from "./subComponents/DCARow";
 import {toast} from "react-hot-toast";
+import {ethers} from "ethers";
+import {ERC20_ABI} from "../contracts/InProduction/ERC20";
+import {DCA_ADDRESS} from "../contracts/DCA";
 
 
 export default function ActiveDCA(props) {
@@ -19,7 +22,8 @@ export default function ActiveDCA(props) {
                         // eslint-disable-next-line react/jsx-key
                         <DCARow dca={dca} active={true} provider={props.provider}
                                 dcaContractWithSigner={props.dcaContractWithSigner}
-                                getDCAs={async () => await props.getDCAs()}/>
+                                getDCAs={async () => await props.getDCAs()}
+                                walletAddress={props.walletAddress}/>
                     )
                 }
             </>
