@@ -161,13 +161,13 @@ export default function CreateDCA(props) {
             </div>
         </div>
         {balance != null && amount != null && !approvalNeeded ?
-            allowance > balance ?
+            allowance >= balance ?
                 <p className={styles.dcaCreationText} style={{textAlign: 'center', fontSize: 16, marginBottom: 8}}>You
                     have {balance} {TOKEN_MAP[stableToken]} in your wallet, <b>enough
-                        for {Math.floor(balance / amount)} purchases.</b></p> :
+                        for {Math.floor(balance / amount)} purchases.</b> (First purchase is made during DCA creation.)</p> :
                 <p className={styles.dcaCreationText} style={{textAlign: 'center', fontSize: 16, marginBottom: 8}}>You
                     approved for spending of {allowance} {TOKEN_MAP[stableToken]}, <b>enough
-                        for {Math.floor(allowance / amount)} purchases.</b></p>
+                        for {Math.floor(allowance / amount)} purchases.</b> (First purchase is made during DCA creation.)</p>
             : null}
         <div className={styles.rowNoMarginNoPadding}>
             <div className={styles.mainButton}
