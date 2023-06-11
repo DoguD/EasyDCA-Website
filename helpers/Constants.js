@@ -50,12 +50,14 @@ export const TARGET_TOKENS = [
         value: '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454',
         image: {avatar: true, src: '/bnb.png'},
     },
+    /*
     {
         key: 'AVAX',
         text: 'AVAX',
         value: '0x511D35c52a3C244E7b8bd92c0C297755FbD89212',
         image: {avatar: true, src: '/AVAX.png'},
     },
+     */
     {
         key: 'BRUSH',
         text: 'BRUSH',
