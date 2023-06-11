@@ -22,7 +22,7 @@ export default function MainSection(props) {
                         <div className={styles.mainInnerRow}>
                             <img src={"/mainIcons/Time.png"} className={styles.mainIcon}/>
                             <p className={styles.mainInnerNumber}>2</p>
-                            <p className={styles.mainInnerText}>Choose the period you want to buy</p>
+                            <p className={styles.mainInnerText}>Choose the frequency you want to buy</p>
                         </div>
                         <div className={styles.mainInnerRow}>
                             <img src={"/mainIcons/chainlink.png"} className={styles.mainIcon}/>

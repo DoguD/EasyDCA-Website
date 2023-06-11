@@ -78,58 +78,64 @@ export default function DCARow(props) {
         })
     }
 
-    function getPeriodOption(period) {
+    function getFrequencyOption(frequency) {
         let text;
-        if (period < (24 * 60 * 60)) {
+        if (frequency < (24 * 60 * 60)) {
             text = ' seconds'
-        } else if (period < (7 * 24 * 60 * 60)) {
-            period /= (24 * 60 * 60)
+        } else if (frequency < (7 * 24 * 60 * 60)) {
+            frequency /= (24 * 60 * 60)
             text = ' days'
-        } else if (period < (30 * 24 * 60 * 60)) {
-            period /= (7 * 24 * 60 * 60)
+        } else if (frequency < (30 * 24 * 60 * 60)) {
+            frequency /= (7 * 24 * 60 * 60)
             text = ' weeks'
         } else {
-            period /= (30 * 24 * 60 * 60)
+            frequency /= (30 * 24 * 60 * 60)
             text = ' months'
         }
-        return period.toString() + text;
+        return frequency.toString() + text;
+    }
+
+    function timeToTwoDigits(time) {
+        if (time < 10) {
+            return "0" + time;
+        }
+        return time;
     }
 
     return (
         <>
             <div className={styles.dcaRowContainer} style={{backgroundColor: props.active ? "#ffffff" : "lightgrey"}}>
-                <p className={styles.dcaNoText}><b>Stable
-                    Amount: </b>{props.dca.amount}
-                </p>
-                <img src={TOKEN_LOGOS[props.dca.stableCoin]} style={{marginLeft: 8}} width={22} height={22}/>
-
-                <p className={styles.dcaNoText} style={{marginLeft: 16}}><b>Target
-                    Coin: </b>{TOKEN_MAP[props.dca.targetCoin]}
+                <p className={styles.dcaNoText}><b>Coin: </b>{TOKEN_MAP[props.dca.targetCoin]}
                 </p>
                 <img src={TOKEN_LOGOS[props.dca.targetCoin]} style={{marginLeft: 8}} width={22} height={22}/>
 
-                <p className={styles.dcaNoText} style={{marginLeft: 16}}><b>Purchase
-                    Period:</b>{getPeriodOption(props.dca.frequency)}
+                <p className={styles.dcaNoText} style={{marginLeft: 16}}><b>Amount: </b>{props.dca.amount}
                 </p>
+                <img src={TOKEN_LOGOS[props.dca.stableCoin]} style={{marginLeft: 8}} width={22} height={22}/>
 
-                <p className={styles.dcaNoText} style={{marginLeft: 16}}><b>Last
-                    Purchase:</b>{lastPurchase.getDate() + " " + MONTHS[lastPurchase.getMonth()] + ", " + lastPurchase.getFullYear()}
+                <p className={styles.dcaNoText} style={{marginLeft: 16}}>
+                    <b>Frequency: </b>{getFrequencyOption(props.dca.frequency)}
                 </p>
 
                 {props.active ?
-                    <p className={styles.dcaNoText} style={{marginLeft: 16}}><b>Next
-                        Purchase:</b>{nextPurchase.getDate() + " " + MONTHS[nextPurchase.getMonth()] + ", " + nextPurchase.getFullYear()}
-                    </p> : null}
-                {props.active ? <>
-                    <div style={{flex: 1}}/>
-                    {isLoading ? <ClipLoader size={22} color={'red'}/> :
-                        <AiFillDelete size={22} color={"red"} style={{cursor: 'pointer'}} onClick={() => {
-                            confirm("Are you sure you want to delete this DCA strategy? If you do so, automatic purchases will no longer happen for this strategy.") && deleteDCA(props.dca.id)
-                        }}/>}
-                </> : null}
+                    <>
+                        <p className={styles.dcaNoText} style={{marginLeft: 16}}><b>Next
+                            Purchase: </b>{nextPurchase.getDate() + " " + MONTHS[nextPurchase.getMonth()] + " " + nextPurchase.getFullYear() + ", " + timeToTwoDigits(lastPurchase.getHours()) + ":" + timeToTwoDigits(lastPurchase.getMinutes())}
+                        </p>
+                        <div style={{flex: 1}}/>
+                        {isLoading ? <ClipLoader size={22} color={'red'}/> :
+                            <AiFillDelete size={22} color={"red"} style={{cursor: 'pointer'}} onClick={() => {
+                                confirm("Are you sure you want to delete this DCA strategy? If you do so, automatic purchases will no longer happen for this strategy.") && deleteDCA(props.dca.id)
+                            }}/>}
+                    </> : <>
+                        <p className={styles.dcaNoText} style={{marginLeft: 16}}><b>Last
+                            Purchase: </b>{lastPurchase.getDate() + " " + MONTHS[lastPurchase.getMonth()] + " " + lastPurchase.getFullYear() + ", " + timeToTwoDigits(lastPurchase.getHours()) + ":" + timeToTwoDigits(lastPurchase.getMinutes())}
+                        </p>
+                    </>}
             </div>
             {approvalNeeded ?
-                <div className={styles.rowNoMarginNoPadding} style={{cursor: 'pointer', marginTop: 8, alignItems: 'flex-start', justifyContent: 'flex-start'}}
+                <div className={styles.rowNoMarginNoPadding}
+                     style={{cursor: 'pointer', marginTop: 8, alignItems: 'flex-start', justifyContent: 'flex-start'}}
                      onClick={async () => approve()}>
                     <AiOutlineWarning size={22} color={"darkred"} style={{marginRight: 8}}/>
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
@@ -138,10 +144,12 @@ export default function DCARow(props) {
                 </div>
                 :
                 balanceNeeded ?
-                    <div className={styles.rowNoMarginNoPadding} style={{marginTop: 8, alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+                    <div className={styles.rowNoMarginNoPadding}
+                         style={{marginTop: 8, alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                         <AiOutlineWarning size={22} color={"darkred"} style={{marginRight: 8}}/>
                         {/* eslint-disable-next-line react/no-unescaped-entities */}
-                        <p className={styles.dcaNoText} style={{marginLeft: 0, color: "darkred"}}>You currently don't have
+                        <p className={styles.dcaNoText} style={{marginLeft: 0, color: "darkred"}}>You currently don't
+                            have
                             enough {TOKEN_MAP[props.dca.stableCoin]} in your wallet for this strategy.</p>
                     </div>
                     : null

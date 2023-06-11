@@ -1,6 +1,6 @@
 import styles from "../styles/Home.module.css";
 import React, {useEffect, useState} from "react";
-import {PERIOD_OPTIONS, STABLE_TOKENS, TARGET_TOKENS, TOKEN_DECIMALS, TOKEN_MAP, TOKENS} from "../helpers/Constants";
+import {FREQUENCY_OPTIONS, STABLE_TOKENS, TARGET_TOKENS, TOKEN_DECIMALS, TOKEN_MAP, TOKENS} from "../helpers/Constants";
 import {Dropdown} from "semantic-ui-react";
 import {ClipLoader} from "react-spinners";
 import {ERC20_ABI} from "../contracts/InProduction/ERC20";
@@ -13,8 +13,8 @@ export default function CreateDCA(props) {
     const [amount, setAmount] = useState();
     const [token, setToken] = useState();
     const [stableToken, setStableToken] = useState();
-    const [period, setPeriod] = useState();
-    const [periodOption, setPeriodOption] = useState();
+    const [frequency, setFrequency] = useState();
+    const [frequencyOption, setFrequencyOption] = useState();
     // UI Controllers
     const [balance, setBalance] = useState(null);
     const [approvalNeeded, setApprovalNeeded] = useState(true);
@@ -28,7 +28,7 @@ export default function CreateDCA(props) {
     }, [props.walletAddress, stableToken]);
 
     function isValid() {
-        let result = amount != null && token != null && stableToken != null && period != null && periodOption != null;
+        let result = amount != null && token != null && stableToken != null && frequency != null && frequencyOption != null;
         return result;
     }
 
@@ -71,12 +71,12 @@ export default function CreateDCA(props) {
             console.log(stableToken)
             console.log(token)
             console.log(amount)
-            console.log(period * periodOption)
+            console.log(frequency * frequencyOption)
             let transaction = await props.dcaContractWithSigner.addDCA(
                 stableToken,
                 token,
                 amount,
-                period * periodOption,
+                frequency * frequencyOption,
             );
             setListener(transaction.hash, 'dca');
         } catch (e) {
@@ -143,19 +143,19 @@ export default function CreateDCA(props) {
             </div>
             <p className={styles.dcaCreationText}>every</p><
             input className={styles.basicInput} type={"text"} id={"dca-amount"}
-                  value={period}
+                  value={frequency}
                   placeholder={""}
                   onChange={(b) => {
-                      setPeriod(b.target.value)
+                      setFrequency(b.target.value)
                   }}></input>
             <div style={{width: 160}}>
                 <Dropdown
-                    placeholder='Select Period'
+                    placeholder='Select Frequency'
                     fluid
                     selection
-                    options={PERIOD_OPTIONS}
+                    options={FREQUENCY_OPTIONS}
                     onChange={(e, {value}) => {
-                        setPeriodOption(value);
+                        setFrequencyOption(value);
                     }}
                 />
             </div>

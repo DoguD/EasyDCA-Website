@@ -2,7 +2,7 @@ export const DEPLOY_BLOCK =
     63819642;
 export const MAX_BIG_INT = BigInt(115792089237316195423570985008687907853269984665640564039457584007913129639935);
 
-export const PERIOD_OPTIONS = [
+export const FREQUENCY_OPTIONS = [
     {
         key: 'seconds',
         text: "seconds",
