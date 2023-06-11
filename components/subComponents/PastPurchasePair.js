@@ -1,5 +1,5 @@
 import styles from "../../styles/Home.module.css";
-import {TOKEN_DECIMALS, TOKEN_LOGOS_FROM_NAME} from "../../helpers/Constants";
+import {TOKEN_DECIMALS, TOKEN_LOGOS, TOKEN_LOGOS_FROM_NAME} from "../../helpers/Constants";
 import {AiOutlineCaretDown, AiOutlineCaretUp} from "react-icons/ai";
 import PastPurchaseRow from "./PastPurchaseRow";
 import React, {useState} from "react";
@@ -13,7 +13,15 @@ export default function PastPurchasePair(props) {
         for (let i = 0; i < purchases.length; i++) {
             total += (purchases[i].targetAmount / (10 ** TOKEN_DECIMALS[purchases[i].targetCoin]));
         }
-        return (1 / (total / purchases.length)).toFixed(4);
+        return (1 / (total / purchases.length)).toFixed(2);
+    }
+
+    function getTotalAccumulated(purchases) {
+        let total = 0;
+        for (let i = 0; i < purchases.length; i++) {
+            total += (purchases[i].targetAmount / (10 ** TOKEN_DECIMALS[purchases[i].targetCoin]));
+        }
+        return total.toFixed(4);
     }
 
     return (
@@ -33,10 +41,13 @@ export default function PastPurchasePair(props) {
                 </p>
                 <img src={TOKEN_LOGOS_FROM_NAME[props.pair.split("-")[0]]}
                      style={{marginLeft: 2, marginRight: 0, width: 20}}/>
-                <p className={styles.dcaNoText} style={{marginLeft: 24, fontSize: 20}}><span style={{fontWeight: 600}}>Purchase
-                    Count:</span> {props.purchaseDict.length}</p>
+                <p className={styles.dcaNoText} style={{marginLeft: 24, fontSize: 20}}><span
+                    style={{fontWeight: 600}}>Purchases:</span> {props.purchaseDict.length}</p>
                 <p className={styles.dcaNoText} style={{marginLeft: 24, fontSize: 20}}><span style={{fontWeight: 600}}>Average
                     Price: </span>${getAveragePurchase(props.purchaseDict)}</p>
+                <p className={styles.dcaNoText} style={{marginLeft: 24, fontSize: 20}}><span style={{fontWeight: 600}}>Total: </span>{getTotalAccumulated(props.purchaseDict)}
+                </p>
+                <img src={TOKEN_LOGOS[props.purchaseDict[0].targetCoin]} style={{marginLeft: 8}} width={22} height={22}/>
                 <div style={{flex: 1}}/>
                 {open ?
                     <AiOutlineCaretUp size={22} style={{cursor: "pointer", margin: 0}}
