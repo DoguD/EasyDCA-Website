@@ -1,6 +1,4 @@
-export const DEPLOY_BLOCK =
-    63968047;
-export const MAX_BIG_INT = BigInt(115792089237316195423570985008687907853269984665640564039457584007913129639935);
+export const DEPLOY_BLOCK = 63968047;
 
 export const FREQUENCY_OPTIONS = [
     {
@@ -84,45 +82,6 @@ export const STABLE_TOKENS = [
         text: 'fUSDT',
         value: '0x049d68029688eAbF473097a2fC38ef61633A3C7A',
         image: {avatar: true, src: '/fUSDT.png'},
-    },
-]
-
-export const TOKENS = [
-    {
-        key: 'wETH',
-        text: 'wETH',
-        value: '0x74b23882a30290451A17c44f4F05243b6b58C76d',
-        image: {avatar: true, src: '/weth.webp'},
-    },
-    {
-        key: 'wFTM',
-        text: 'wFTM',
-        value: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
-        image: {avatar: true, src: '/wftm.webp'},
-    },
-    {
-        key: 'BOO',
-        text: 'BOO',
-        value: '0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE',
-        image: {avatar: true, src: '/boo.png'},
-    },
-    {
-        key: 'BNB',
-        text: 'BNB',
-        value: '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454',
-        image: {avatar: true, src: '/bnb.png'},
-    },
-    {
-        key: 'AVAX',
-        text: 'AVAX',
-        value: '0x511D35c52a3C244E7b8bd92c0C297755FbD89212',
-        image: {avatar: true, src: '/AVAX.png'},
-    },
-    {
-        key: 'BRUSH',
-        text: 'BRUSH',
-        value: '0x85dec8c4B2680793661bCA91a8F129607571863d',
-        image: {avatar: true, src: '/brush.webp'},
     },
 ]
 

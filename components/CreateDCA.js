@@ -1,6 +1,6 @@
 import styles from "../styles/Home.module.css";
 import React, {useEffect, useState} from "react";
-import {FREQUENCY_OPTIONS, STABLE_TOKENS, TARGET_TOKENS, TOKEN_DECIMALS, TOKEN_MAP, TOKENS} from "../helpers/Constants";
+import {FREQUENCY_OPTIONS, STABLE_TOKENS, TARGET_TOKENS, TOKEN_DECIMALS, TOKEN_MAP} from "../helpers/Constants";
 import {Dropdown} from "semantic-ui-react";
 import {ClipLoader} from "react-spinners";
 import {ERC20_ABI} from "../contracts/InProduction/ERC20";
