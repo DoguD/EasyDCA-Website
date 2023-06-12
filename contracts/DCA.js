@@ -1,5 +1,4 @@
-export const DCA_ADDRESS = "0xb1dD5c9f86093c99E1D14b81723B8Ff37044f706";
-// export const DCA_ADDRESS= "0xabb6b23d8C19beCd9BdaeD1cD75682c3aD9d836C"; // test
+export const DCA_ADDRESS = "0x6761ce0f0bC962B4949F1Ba6Ccb89645b05b04EA";
 export const DCA_ABI = [{"inputs": [], "stateMutability": "nonpayable", "type": "constructor"}, {
     "anonymous": false,
     "inputs": [{
