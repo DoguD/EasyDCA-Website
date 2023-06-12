@@ -13,7 +13,7 @@ export default function PastPurchasePair(props) {
         for (let i = 0; i < purchases.length; i++) {
             total += (purchases[i].targetAmount / (10 ** TOKEN_DECIMALS[purchases[i].targetCoin]));
         }
-        return (1 / (total / purchases.length)).toFixed(2);
+        return (1 / (total / (purchases.length * (purchases[0].stableAmount / 10 ** TOKEN_DECIMALS[purchases[0].stableCoin]) ))).toFixed(2);
     }
 
     function getTotalAccumulated(purchases) {
